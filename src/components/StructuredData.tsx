@@ -11,8 +11,8 @@ export function StructuredData({ type, data }: StructuredDataProps) {
       "@context": "https://schema.org",
       "@type": "Organization",
       name: "Maji Safi Solutions",
-      url: "https://maji-safi-solutions.com",
-      logo: "https://maji-safi-solutions.com/logo.png",
+      url: "https://maji-safi-solutions.vercel.app",
+      logo: "https://maji-safi-solutions.vercel.app/logo.png",
       description:
         "Maji Safi Solutions brings clean water access to underserved communities. Join our mission to provide safe drinking water and sanitation solutions.",
       sameAs: [
@@ -36,7 +36,7 @@ export function StructuredData({ type, data }: StructuredDataProps) {
       "@context": "https://schema.org",
       "@type": "NGO",
       name: "Maji Safi Solutions",
-      url: "https://maji-safi-solutions.com",
+      url: "https://maji-safi-solutions.vercel.app",
       description:
         "Maji Safi Solutions is dedicated to providing clean water and sanitation solutions to underserved communities.",
       areaServed: "Africa",

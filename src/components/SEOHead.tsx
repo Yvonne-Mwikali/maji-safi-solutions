@@ -12,8 +12,8 @@ interface SEOHeadProps {
 export function SEOHead({
   title = "Maji Safi Solutions - Clean Water for Communities",
   description = "Maji Safi Solutions brings clean water access to underserved communities. Join our mission to provide safe drinking water and sanitation solutions.",
-  image = "https://maji-safi-solutions.com/og-image.png",
-  url = "https://maji-safi-solutions.com",
+  image = "https://maji-safi-solutions.vercel.app/og-image.png",
+  url = "https://maji-safi-solutions.vercel.app",
   type = "website",
   keywords = "clean water, water access, sanitation, community development",
 }: SEOHeadProps) {
