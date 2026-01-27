@@ -13,7 +13,7 @@ export default function Projects() {
     ? projects?.filter((project) => project.category === selectedCategory)
     : projects;
 
-  const categories = ["Borehole", "Piping", "School", "Irrigation"];
+  const categories = ["Borehole", "Distribution", "School", "Irrigation"];
 
   return (
     <div className="min-h-screen pt-24 pb-16">
