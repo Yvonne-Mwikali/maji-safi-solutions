@@ -18,7 +18,7 @@ export function StructuredData({ type, data }: StructuredDataProps) {
         "Maji Safi Solutions brings clean water access to underserved communities. Join our mission to provide safe drinking water and sanitation solutions.",
       sameAs: [
         SOCIAL_LINKS.facebook,
-        SOCIAL_LINKS.twitter,
+        SOCIAL_LINKS.linkedin,
         SOCIAL_LINKS.instagram,
       ],
       contactPoint: {

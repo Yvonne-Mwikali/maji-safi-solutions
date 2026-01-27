@@ -7,8 +7,8 @@ export const SITE_LINKS = {
 };
 
 export const SOCIAL_LINKS = {
-  facebook: "https://www.facebook.com/majisafisolutions",
-  twitter: "https://twitter.com/majisafisolutions",
+  facebook: "https://www.facebook.com/profile.php?id=61586828776634",
+  linkedin: "https://www.linkedin.com/company/majisafi-solutions/",
   instagram: "https://www.instagram.com/majisafisolutions/",
 };
 

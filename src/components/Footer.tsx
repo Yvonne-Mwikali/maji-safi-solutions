@@ -4,7 +4,7 @@ import {
   MapPin,
   Phone,
   Facebook,
-  Twitter,
+  Linkedin,
   Instagram,
 } from "lucide-react";
 import { SOCIAL_LINKS } from "@/constants/links";
@@ -141,14 +141,14 @@ export default function Footer() {
                 <Facebook className="h-5 w-5" />
               </a>
               <a
-                href={SOCIAL_LINKS.twitter}
+                href={SOCIAL_LINKS.linkedin}
                 className="bg-white/10 text-white p-2.5 rounded-md hover:bg-secondary hover:text-primary transition-colors"
-                data-testid="link-social-twitter"
+                data-testid="link-social-linkedin"
                 target="_blank"
                 rel="noreferrer"
-                aria-label="Twitter"
+                aria-label="LinkedIn"
               >
-                <Twitter className="h-5 w-5" />
+                <Linkedin className="h-5 w-5" />
               </a>
               <a
                 href={SOCIAL_LINKS.instagram}
