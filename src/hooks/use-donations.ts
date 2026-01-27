@@ -11,7 +11,7 @@ export function useCreateDonation() {
   const { toast } = useToast();
   const [isPending, setIsPending] = useState(false);
 
-  const mutate = (data: InsertDonation, options?: MutationOptions) => {
+  const mutate = (_data: InsertDonation, options?: MutationOptions) => {
     setIsPending(true);
 
     // Simulate a network request so UI states remain intact without a backend.
