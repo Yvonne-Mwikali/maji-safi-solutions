@@ -64,18 +64,18 @@ export const mockProjects: Project[] = [
     category: "Borehole",
     location: "Makueni, Kenya",
     imageUrl: "/borehole.jpeg",
-    targetAmount: 45000,
+    targetAmount: 25000,
     currentAmount: 0,
   },
   {
     id: 2,
-    title: "Household Piping Network",
+    title: "Community Centered Distribution Centers",
     description:
-      "Laying piping infrastructure from protected springs to reach households with safe water access.",
-    category: "Piping",
+      "Building distribution centers where community members can fetch clean water from protected springs.",
+    category: "Distribution",
     location: "Makueni, Kenya",
     imageUrl: "/piping.jpeg",
-    targetAmount: 52000,
+    targetAmount: 5000,
     currentAmount: 0,
   },
   {
@@ -86,20 +86,20 @@ export const mockProjects: Project[] = [
     category: "School",
     location: "Makueni, Kenya",
     imageUrl: "/school.jpeg",
-    targetAmount: 18000,
+    targetAmount: 15000,
     currentAmount: 0,
   },
-  {
-    id: 4,
-    title: "Irrigation System",
-    description:
-      "Developing sustainable irrigation systems to support agricultural productivity in farming communities.",
-    category: "Irrigation",
-    location: "Makueni, Kenya",
-    imageUrl: "/irrigation.jpeg",
-    targetAmount: 35000,
-    currentAmount: 0,
-  },
+  // {
+  //   id: 4,
+  //   title: "Irrigation System",
+  //   description:
+  //     "Developing sustainable irrigation systems to support agricultural productivity in farming communities.",
+  //   category: "Irrigation",
+  //   location: "Makueni, Kenya",
+  //   imageUrl: "/irrigation.jpeg",
+  //   targetAmount: 35000,
+  //   currentAmount: 0,
+  // },
 ];
 
 export const mockTeam: TeamMember[] = [

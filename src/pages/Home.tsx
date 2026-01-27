@@ -45,15 +45,15 @@ export default function Home() {
                 and economic growth.
               </p>
               <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-                Maji Safi Solutions breaks this cycle. We don't just dig wells;
-                we engineer sustainable infrastructure and train local
+                Maji Safi Solutions breaks this cycle. We don't just drill
+                wells; we engineer sustainable infrastructure and train local
                 communities to maintain it.
               </p>
 
               <div className="space-y-4">
                 {[
                   "Deliver a solar-powered borehole serving rural villages in Kenya",
-                  "Pipe clean water to households, schools, and clinics",
+                  "Distribute clean water to households, schools, and clinics",
                   "Train local operators to keep systems running for the long term",
                 ].map((item, i) => (
                   <motion.div
@@ -139,8 +139,8 @@ export default function Home() {
                 Current Projects Needing Support
               </h2>
               <p className="text-muted-foreground">
-                Directly fund a specific borehole or piping project. 100% of
-                project donations go to the field.
+                Directly fund a specific borehole or distribution center
+                project. 100% of project donations go to the field.
               </p>
             </div>
             <Link href="/projects" data-testid="link-view-all-projects">
