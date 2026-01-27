@@ -21,7 +21,7 @@ export default function Footer() {
               className="flex items-center gap-2"
               data-testid="link-footer-logo"
             >
-              <div className="bg-white text-primary p-2 rounded-md">
+              <div className=" text-primary p-2 rounded-md">
                 <img
                   src="/logo.png"
                   alt="Maji Safi logo"

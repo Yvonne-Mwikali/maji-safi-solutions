@@ -42,7 +42,7 @@ export default function Navigation() {
             className="flex items-center gap-3 group"
             data-testid="link-home-logo"
           >
-            <div className="bg-white text-primary p-2 rounded-md group-hover:scale-105 transition-transform duration-300">
+            <div className=" text-primary p-2 rounded-md group-hover:scale-105 transition-transform duration-300">
               <img
                 src="/logo.png"
                 alt="Maji Safi logo"
