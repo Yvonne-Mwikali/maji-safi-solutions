@@ -1,9 +1,4 @@
-import { useState, useRef } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { insertDonationSchema, type InsertDonation } from "@/data/mockData";
-import { useCreateDonation } from "@/hooks/use-donations";
-import { useToast } from "@/hooks/use-toast";
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -12,11 +7,14 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Loader2, Heart } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { insertDonationSchema, type InsertDonation } from "@/data/mockData";
+import { useToast } from "@/hooks/use-toast";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Heart, Loader2 } from "lucide-react";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 
 interface DonationModalProps {
   projectId?: number;
@@ -31,7 +29,6 @@ export default function DonationModal({
 }: DonationModalProps) {
   const [open, setOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const formRef = useRef<HTMLFormElement>(null);
   const { toast } = useToast();
 
   const form = useForm<InsertDonation>({
