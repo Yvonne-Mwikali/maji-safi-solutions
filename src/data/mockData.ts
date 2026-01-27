@@ -1,3 +1,4 @@
+import { TEAM_LINKS } from "@/constants/links";
 import { z } from "zod";
 
 export const projectSchema = z.object({
@@ -108,9 +109,9 @@ export const mockTeam: TeamMember[] = [
     role: "Founder & Executive Director",
     bio: "Leads the vision, strategy, and partnerships to deliver sustainable, community-centered water access across rural Kenya.",
     imageUrl: "/agnes.jpeg",
-    email: "akaumbulu@colgate.edu",
-    phone: "+1 (315) 864-0795",
-    linkedin: "https://www.linkedin.com/in/agnes-kaumbulu",
+    email: TEAM_LINKS.agnes.email,
+    phone: TEAM_LINKS.agnes.phone,
+    linkedin: TEAM_LINKS.agnes.linkedin,
   },
   {
     id: 2,
@@ -118,10 +119,10 @@ export const mockTeam: TeamMember[] = [
     role: "Technical Lead & Web Manager",
     bio: "Technical expert managing website development, social media presence, and digital infrastructure for Maji Safi Solutions.",
     imageUrl: "/yvonne.jpeg",
-    email: "yvonnemwikali162@gmail.com",
-    phone: "+254796808579",
-    linkedin: "https://www.linkedin.com/in/yvonne-mwikali/",
-    gmail: "yvonnemwikali162@gmail.com",
+    email: TEAM_LINKS.yvonne.email,
+    phone: TEAM_LINKS.yvonne.phone,
+    linkedin: TEAM_LINKS.yvonne.linkedin,
+    gmail: TEAM_LINKS.yvonne.gmail,
   },
   {
     id: 3,
@@ -129,9 +130,9 @@ export const mockTeam: TeamMember[] = [
     role: "Program Director",
     bio: "Oversees service delivery and mission implementation so projects stay on-scope and on-impact.",
     imageUrl: "/nelly.jpeg",
-    email: "nellyk@middlebury.edu",
-    phone: "+1 (802) 610-4092",
-    linkedin: "https://www.linkedin.com/in/nelly-karimi-74086327b",
+    email: TEAM_LINKS.nelly.email,
+    phone: TEAM_LINKS.nelly.phone,
+    linkedin: TEAM_LINKS.nelly.linkedin,
   },
   {
     id: 4,
@@ -139,8 +140,8 @@ export const mockTeam: TeamMember[] = [
     role: "Operations & Field Manager",
     bio: "Coordinates communities, contractors, and authorities to deliver compliant, efficient, and sustainable borehole builds.",
     imageUrl: "/ansila.jpeg",
-    email: "ansilabahati1@gmail.edu",
-    phone: "+254 725 001967",
-    facebook: "https://www.facebook.com/ansila.kinyili/",
+    email: TEAM_LINKS.ansila.email,
+    phone: TEAM_LINKS.ansila.phone,
+    facebook: TEAM_LINKS.ansila.facebook,
   },
 ];

@@ -1,3 +1,4 @@
+import { SITE_LINKS } from "@/constants/links";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -101,7 +102,7 @@ export default function DonationModal({
 
         <form
           ref={formRef}
-          action="https://send.pageclip.co/0dpcc9PmOD35T08kTAjVaHO9sLqHl45F/donations"
+          action={SITE_LINKS.donationForm}
           className="pageclip-form space-y-6 mt-4"
           method="post"
           onSubmit={() => setIsSubmitting(true)}

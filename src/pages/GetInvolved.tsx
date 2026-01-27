@@ -3,11 +3,12 @@ import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogTitle
+  DialogTitle,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
+import { SITE_LINKS } from "@/constants/links";
 import { motion } from "framer-motion";
 import {
   Briefcase,
@@ -146,7 +147,7 @@ export default function GetInvolved() {
               <CardContent className="p-8">
                 <form
                   ref={formRef}
-                  action="https://send.pageclip.co/0dpcc9PmOD35T08kTAjVaHO9sLqHl45F/donations"
+                  action={SITE_LINKS.donationForm}
                   className="pageclip-form space-y-6"
                   method="post"
                 >
@@ -161,7 +162,6 @@ export default function GetInvolved() {
                     <div className="space-y-2">
                       <label className="text-sm font-medium">Email</label>
                       <Input
-                        name="email"
                         type="email"
                         placeholder="email@example.com"
                         required

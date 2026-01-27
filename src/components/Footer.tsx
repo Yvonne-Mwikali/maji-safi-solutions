@@ -7,6 +7,7 @@ import {
   Twitter,
   Instagram,
 } from "lucide-react";
+import { SOCIAL_LINKS } from "@/constants/links";
 
 export default function Footer() {
   return (
@@ -130,23 +131,32 @@ export default function Footer() {
             </h3>
             <div className="flex gap-4 mb-6">
               <a
-                href="#"
+                href={SOCIAL_LINKS.facebook}
                 className="bg-white/10 text-white p-2.5 rounded-md hover:bg-secondary hover:text-primary transition-colors"
                 data-testid="link-social-facebook"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Facebook"
               >
                 <Facebook className="h-5 w-5" />
               </a>
               <a
-                href="#"
+                href={SOCIAL_LINKS.twitter}
                 className="bg-white/10 text-white p-2.5 rounded-md hover:bg-secondary hover:text-primary transition-colors"
                 data-testid="link-social-twitter"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Twitter"
               >
                 <Twitter className="h-5 w-5" />
               </a>
               <a
-                href="#"
+                href={SOCIAL_LINKS.instagram}
                 className="bg-white/10 text-white p-2.5 rounded-md hover:bg-secondary hover:text-primary transition-colors"
                 data-testid="link-social-instagram"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Instagram"
               >
                 <Instagram className="h-5 w-5" />
               </a>

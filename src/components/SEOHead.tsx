@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { SITE_LINKS } from "@/constants/links";
 
 interface SEOHeadProps {
   title?: string;
@@ -12,8 +13,8 @@ interface SEOHeadProps {
 export function SEOHead({
   title = "Maji Safi Solutions - Clean Water for Communities",
   description = "Maji Safi Solutions brings clean water access to underserved communities. Join our mission to provide safe drinking water and sanitation solutions.",
-  image = "https://maji-safi-solutions.vercel.app/og-image.png",
-  url = "https://maji-safi-solutions.vercel.app",
+  image = SITE_LINKS.ogImage,
+  url = SITE_LINKS.baseUrl,
   type = "website",
   keywords = "clean water, water access, sanitation, community development",
 }: SEOHeadProps) {
