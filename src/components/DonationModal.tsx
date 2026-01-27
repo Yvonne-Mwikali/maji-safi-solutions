@@ -35,6 +35,7 @@ export default function DonationModal({
   type = "donations",
 }: DonationModalProps) {
   const [open, setOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
   const formRef = useRef<HTMLFormElement>(null);
 
@@ -47,6 +48,7 @@ export default function DonationModal({
       const form = formRef.current;
 
       const handleSuccess = () => {
+        setIsSubmitting(false);
         toast({
           title: "Thank you!",
           description:
@@ -61,6 +63,7 @@ export default function DonationModal({
       };
 
       const handleError = () => {
+        setIsSubmitting(false);
         toast({
           title: "Error",
           description: "Something went wrong. Please try again later.",
@@ -101,6 +104,7 @@ export default function DonationModal({
           action="https://send.pageclip.co/0dpcc9PmOD35T08kTAjVaHO9sLqHl45F/donations"
           className="pageclip-form space-y-6 mt-4"
           method="post"
+          onSubmit={() => setIsSubmitting(true)}
         >
           {/* Hidden field for submission type */}
           <input type="hidden" name="type" value={type} />
@@ -144,9 +148,18 @@ export default function DonationModal({
 
           <button
             type="submit"
-            className="pageclip-form__submit w-full text-lg py-6 bg-secondary hover:bg-secondary/90 rounded-md font-medium transition-colors"
+            className="pageclip-form__submit w-full text-lg py-6 bg-secondary hover:bg-secondary/90 rounded-md font-medium transition-colors disabled:opacity-70 disabled:cursor-not-allowed"
+            disabled={isSubmitting}
+            aria-busy={isSubmitting}
           >
-            <span>Submit pledge</span>
+            {isSubmitting ? (
+              <span className="flex items-center justify-center gap-2">
+                <span className="h-5 w-5 rounded-full border-2 border-white/70 border-t-transparent animate-spin" />
+                Sending...
+              </span>
+            ) : (
+              <span>Submit pledge</span>
+            )}
           </button>
 
           <p className="text-xs text-center text-muted-foreground">

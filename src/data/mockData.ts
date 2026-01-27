@@ -125,7 +125,7 @@ export const mockTeam: TeamMember[] = [
   },
   {
     id: 3,
-    name: "Nelly",
+    name: "Nelly Karimi",
     role: "Program Director",
     bio: "Oversees service delivery and mission implementation so projects stay on-scope and on-impact.",
     imageUrl: "/nelly.jpeg",
