@@ -1,68 +1,71 @@
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { insertInquirySchema, type InsertInquiry } from "@/data/mockData";
-import { useToast } from "@/hooks/use-toast";
-import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogTitle
+} from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Loader2, HeartHandshake, Briefcase, UserPlus } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import {
+  Briefcase,
+  CheckCircle2,
+  HeartHandshake,
+  UserPlus,
+} from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+
+declare global {
+  interface Window {
+    Pageclip?: {
+      form: (form: HTMLFormElement | string) => void;
+    };
+  }
+}
 
 export default function GetInvolved() {
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
+  const formRef = useRef<HTMLFormElement>(null);
+  const [inquiryType, setInquiryType] = useState("Volunteer");
+  const [showThankYou, setShowThankYou] = useState(false);
 
-  const form = useForm<InsertInquiry>({
-    resolver: zodResolver(insertInquirySchema),
-    defaultValues: {
-      name: "",
-      email: "",
-      message: "",
-      type: "Volunteer",
-    },
-  });
+  useEffect(() => {
+    // Initialize Pageclip when component mounts and form is available
+    if (formRef.current && window.Pageclip) {
+      window.Pageclip.form(formRef.current);
 
-  const onSubmit = async (data: InsertInquiry) => {
-    setIsSubmitting(true);
-    const formData = new FormData();
-    formData.append("name", data.name);
-    formData.append("email", data.email);
-    formData.append("message", data.message);
-    formData.append("type", data.type);
+      const form = formRef.current;
 
-    try {
-      const siteKey = import.meta.env.VITE_PAGECLIP_SITE_KEY;
-      const response = await fetch(
-        `https://send.pageclip.co/${siteKey}/inquiry`,
-        {
-          method: "POST",
-          body: formData,
-        },
-      );
-
-      if (response.ok) {
+      const handleSuccess = () => {
         toast({
           title: "Message sent!",
           description:
             "Thank you for reaching out. We'll get back to you as soon as possible.",
         });
-        form.reset();
-      } else {
-        throw new Error("Form submission failed");
-      }
-    } catch (error) {
-      toast({
-        title: "Error",
-        description:
-          "There was a problem submitting your form. Please try again.",
-        variant: "destructive",
-      });
-    } finally {
-      setIsSubmitting(false);
+        form?.reset();
+        setInquiryType("Volunteer");
+        setShowThankYou(true);
+      };
+
+      const handleError = () => {
+        toast({
+          title: "Error",
+          description: "Something went wrong. Please try again later.",
+          variant: "destructive",
+        });
+      };
+
+      form.addEventListener("pageclip-success", handleSuccess);
+      form.addEventListener("pageclip-error", handleError);
+
+      return () => {
+        form.removeEventListener("pageclip-success", handleSuccess);
+        form.removeEventListener("pageclip-error", handleError);
+      };
     }
-  };
+  }, [toast]);
 
   const options = [
     {
@@ -142,33 +145,27 @@ export default function GetInvolved() {
               </CardHeader>
               <CardContent className="p-8">
                 <form
-                  onSubmit={form.handleSubmit(onSubmit)}
-                  className="space-y-6"
+                  ref={formRef}
+                  action="https://send.pageclip.co/0dpcc9PmOD35T08kTAjVaHO9sLqHl45F/donations"
+                  className="pageclip-form space-y-6"
+                  method="post"
                 >
+                  {/* Hidden field for submission type */}
+                  <input type="hidden" name="type" value="contact" />
+
                   <div className="grid md:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <label className="text-sm font-medium">Name</label>
-                      <Input
-                        {...form.register("name")}
-                        placeholder="Your name"
-                      />
-                      {form.formState.errors.name && (
-                        <p className="text-xs text-destructive">
-                          {form.formState.errors.name.message}
-                        </p>
-                      )}
+                      <Input name="name" placeholder="Your name" required />
                     </div>
                     <div className="space-y-2">
                       <label className="text-sm font-medium">Email</label>
                       <Input
-                        {...form.register("email")}
+                        name="email"
+                        type="email"
                         placeholder="email@example.com"
+                        required
                       />
-                      {form.formState.errors.email && (
-                        <p className="text-xs text-destructive">
-                          {form.formState.errors.email.message}
-                        </p>
-                      )}
                     </div>
                   </div>
 
@@ -177,7 +174,9 @@ export default function GetInvolved() {
                       I'm interested in...
                     </label>
                     <select
-                      {...form.register("type")}
+                      name="inquiryType"
+                      value={inquiryType}
+                      onChange={(e) => setInquiryType(e.target.value)}
                       className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
                     >
                       <option value="Volunteer">Volunteering</option>
@@ -189,37 +188,53 @@ export default function GetInvolved() {
                   <div className="space-y-2">
                     <label className="text-sm font-medium">Message</label>
                     <Textarea
-                      {...form.register("message")}
+                      name="message"
                       className="min-h-[150px]"
                       placeholder="Tell us a bit about yourself..."
+                      required
                     />
-                    {form.formState.errors.message && (
-                      <p className="text-xs text-destructive">
-                        {form.formState.errors.message.message}
-                      </p>
-                    )}
                   </div>
 
-                  <Button
+                  <button
                     type="submit"
-                    className="w-full text-lg bg-secondary hover:bg-secondary/90"
-                    disabled={isSubmitting}
+                    className="pageclip-form__submit w-full text-lg bg-secondary hover:bg-secondary/90 rounded-md font-medium py-3 transition-colors"
                   >
-                    {isSubmitting ? (
-                      <>
-                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />{" "}
-                        Sending...
-                      </>
-                    ) : (
-                      "Send Message"
-                    )}
-                  </Button>
+                    <span>Send Message</span>
+                  </button>
                 </form>
               </CardContent>
             </Card>
           </motion.div>
         </div>
       </div>
+
+      {/* Thank You Modal - No close button */}
+      <Dialog open={showThankYou} onOpenChange={() => {}}>
+        <DialogContent className="sm:max-w-md" hideCloseButton>
+          <div className="flex flex-col items-center text-center space-y-6 py-6">
+            <motion.div
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ duration: 0.5 }}
+            >
+              <CheckCircle2 className="h-16 w-16 text-green-500" />
+            </motion.div>
+            <div className="space-y-2">
+              <DialogTitle className="text-3xl font-heading">
+                Thank You!
+              </DialogTitle>
+              <DialogDescription className="text-lg">
+                Your message has been received. We'll review your inquiry and
+                get back to you shortly.
+              </DialogDescription>
+            </div>
+            <p className="text-sm text-muted-foreground">
+              We appreciate your interest in joining the Maji Safi Solutions
+              mission. Our team will be in touch soon.
+            </p>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

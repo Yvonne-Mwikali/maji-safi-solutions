@@ -1,6 +1,6 @@
 import { useTeam } from "@/hooks/use-team";
-import { Loader2, Linkedin, Mail, Facebook } from "lucide-react";
 import { motion } from "framer-motion";
+import { Facebook, Linkedin, Loader2, Mail } from "lucide-react";
 
 export default function Team() {
   const { data: team, isLoading } = useTeam();

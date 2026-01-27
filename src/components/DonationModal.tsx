@@ -9,80 +9,74 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { insertDonationSchema, type InsertDonation } from "@/data/mockData";
 import { useToast } from "@/hooks/use-toast";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Heart, Loader2 } from "lucide-react";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { Heart } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
 
 interface DonationModalProps {
   projectId?: number;
   projectTitle?: string;
   trigger?: React.ReactNode;
+  type?: string;
+}
+
+declare global {
+  interface Window {
+    Pageclip?: {
+      form: (form: HTMLFormElement | string) => void;
+    };
+  }
 }
 
 export default function DonationModal({
   projectId,
   projectTitle,
   trigger,
+  type = "donations",
 }: DonationModalProps) {
   const [open, setOpen] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
+  const formRef = useRef<HTMLFormElement>(null);
 
-  const form = useForm<InsertDonation>({
-    resolver: zodResolver(insertDonationSchema),
-    defaultValues: {
-      projectId,
-      name: "",
-      email: "",
-      phone: "",
-      message: "",
-    },
-  });
+  useEffect(() => {
+    // Initialize Pageclip when modal opens and form is available
+    if (open && formRef.current && window.Pageclip) {
+      window.Pageclip.form(formRef.current);
 
-  const onSubmit = async (data: InsertDonation) => {
-    setIsSubmitting(true);
-    const formData = new FormData();
-    formData.append("name", data.name);
-    formData.append("email", data.email);
-    formData.append("phone", data.phone || "");
-    formData.append("message", data.message);
-    formData.append("projectId", data.projectId?.toString() || "");
+      // Add event listeners for Pageclip events
+      const form = formRef.current;
 
-    try {
-      const siteKey = import.meta.env.VITE_PAGECLIP_SITE_KEY;
-      const response = await fetch(
-        `https://send.pageclip.co/${siteKey}/donation`,
-        {
-          method: "POST",
-          body: formData,
-        },
-      );
-
-      if (response.ok) {
+      const handleSuccess = () => {
         toast({
           title: "Thank you!",
           description:
-            "Your donation pledge has been received. We'll contact you shortly to complete the process.",
+            type === "donations"
+              ? "Your donation pledge has been received. We'll contact you shortly to complete the process."
+              : "Your message has been received. We'll get back to you soon.",
         });
-        setOpen(false);
-        form.reset();
-      } else {
-        throw new Error("Form submission failed");
-      }
-    } catch (error) {
-      toast({
-        title: "Error",
-        description:
-          "There was a problem submitting your form. Please try again.",
-        variant: "destructive",
-      });
-    } finally {
-      setIsSubmitting(false);
+        setTimeout(() => {
+          setOpen(false);
+          form?.reset();
+        }, 1500);
+      };
+
+      const handleError = () => {
+        toast({
+          title: "Error",
+          description: "Something went wrong. Please try again later.",
+          variant: "destructive",
+        });
+      };
+
+      form.addEventListener("pageclip-success", handleSuccess);
+      form.addEventListener("pageclip-error", handleError);
+
+      return () => {
+        form.removeEventListener("pageclip-success", handleSuccess);
+        form.removeEventListener("pageclip-error", handleError);
+      };
     }
-  };
+  }, [open, toast, type]);
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -102,63 +96,58 @@ export default function DonationModal({
           </DialogDescription>
         </DialogHeader>
 
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 mt-4">
+        <form
+          ref={formRef}
+          action="https://send.pageclip.co/0dpcc9PmOD35T08kTAjVaHO9sLqHl45F/donations"
+          className="pageclip-form space-y-6 mt-4"
+          method="post"
+        >
+          {/* Hidden field for submission type */}
+          <input type="hidden" name="type" value={type} />
+
+          {/* Hidden field for project ID */}
+          {projectId && (
+            <input type="hidden" name="projectId" value={projectId} />
+          )}
+          {projectTitle && (
+            <input type="hidden" name="projectTitle" value={projectTitle} />
+          )}
+
           {/* Contact Details */}
           <div className="space-y-4">
             <div className="space-y-1">
               <label className="text-sm font-medium">Your Name</label>
-              <Input {...form.register("name")} placeholder="Jane Doe" />
-              {form.formState.errors.name && (
-                <p className="text-xs text-destructive">
-                  {form.formState.errors.name.message}
-                </p>
-              )}
+              <Input name="name" placeholder="Jane Doe" required />
             </div>
             <div className="space-y-1">
               <label className="text-sm font-medium">Email</label>
               <Input
-                {...form.register("email")}
+                name="email"
                 placeholder="you@example.com"
                 type="email"
+                required
               />
-              {form.formState.errors.email && (
-                <p className="text-xs text-destructive">
-                  {form.formState.errors.email.message}
-                </p>
-              )}
             </div>
             <div className="space-y-1">
               <label className="text-sm font-medium">Phone (optional)</label>
-              <Input {...form.register("phone")} placeholder="+254..." />
-              {form.formState.errors.phone && (
-                <p className="text-xs text-destructive">
-                  {form.formState.errors.phone.message}
-                </p>
-              )}
+              <Input name="phone" placeholder="+254..." />
             </div>
             <div className="space-y-1">
               <label className="text-sm font-medium">Message</label>
               <Textarea
-                {...form.register("message")}
+                name="message"
                 placeholder="Share your pledge details, preferred follow-up, or questions."
                 className="resize-none h-24"
               />
             </div>
           </div>
 
-          <Button
+          <button
             type="submit"
-            className="w-full text-lg py-6 bg-secondary hover:bg-secondary/90"
-            disabled={isSubmitting}
+            className="pageclip-form__submit w-full text-lg py-6 bg-secondary hover:bg-secondary/90 rounded-md font-medium transition-colors"
           >
-            {isSubmitting ? (
-              <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Submitting...
-              </>
-            ) : (
-              "Submit pledge"
-            )}
-          </Button>
+            <span>Submit pledge</span>
+          </button>
 
           <p className="text-xs text-center text-muted-foreground">
             We'll reach out by email to complete your donation.

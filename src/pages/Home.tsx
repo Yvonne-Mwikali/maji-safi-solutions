@@ -1,11 +1,11 @@
-import { motion } from "framer-motion";
-import { Link } from "wouter";
-import { useProjects } from "@/hooks/use-projects";
+import DonationModal from "@/components/DonationModal";
 import Hero from "@/components/Hero";
 import ProjectCard from "@/components/ProjectCard";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, CheckCircle2, Users, Droplets, Globe } from "lucide-react";
-import DonationModal from "@/components/DonationModal";
+import { useProjects } from "@/hooks/use-projects";
+import { motion } from "framer-motion";
+import { ArrowRight, CheckCircle2, Droplets, Globe, Users } from "lucide-react";
+import { Link } from "wouter";
 
 export default function Home() {
   const { data: projects, isLoading } = useProjects();
