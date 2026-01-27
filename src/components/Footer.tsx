@@ -1,6 +1,5 @@
 import { Link } from "wouter";
 import {
-  Droplets,
   Mail,
   MapPin,
   Phone,
