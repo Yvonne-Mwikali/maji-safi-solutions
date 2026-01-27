@@ -32,7 +32,7 @@ export function StructuredData({ type, data }: StructuredDataProps) {
       },
     };
 
-    const defaultNGOData = {
+    const defaultNGOData: Record<string, unknown> = {
       "@context": "https://schema.org",
       "@type": "NGO",
       name: "Maji Safi Solutions",
@@ -42,7 +42,7 @@ export function StructuredData({ type, data }: StructuredDataProps) {
       areaServed: "Africa",
     };
 
-    let structuredData = defaultOrganizationData;
+    let structuredData: Record<string, unknown> = defaultOrganizationData;
 
     if (type === "NGO") {
       structuredData = defaultNGOData;
