@@ -34,7 +34,7 @@ export default function Home() {
               transition={{ duration: 0.8 }}
             >
               <span className="text-secondary font-bold tracking-widest uppercase text-sm mb-2 block">
-                Our Mission
+                Our Vision
               </span>
               <h2 className="text-4xl md:text-5xl font-heading font-bold text-primary mb-6">
                 Water is not just a resource. It is life.
@@ -45,9 +45,10 @@ export default function Home() {
                 and economic growth.
               </p>
               <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-                Maji Safi Solutions breaks this cycle. We don't just drill
-                wells; we engineer sustainable infrastructure and train local
-                communities to maintain it.
+                At MajiSafi, we are committed to ending water scarcity by
+                drilling sustainable boreholes into deeper aquifers, ensuring
+                reliable and clean water for communities facing water
+                challenges.
               </p>
 
               <div className="space-y-4">
@@ -93,7 +94,7 @@ export default function Home() {
                   "I walk 4 hours each day for water."
                 </p>
                 <p className="text-white/70 text-sm italic">
-                  - Kaumbulu, Makueni Resident
+                  - Mwikali, Makueni County Resident
                 </p>
               </div>
             </motion.div>
