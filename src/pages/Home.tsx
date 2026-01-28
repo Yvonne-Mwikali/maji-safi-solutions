@@ -44,6 +44,10 @@ export default function Home() {
                 dirty water. This cycle of scarcity prevents education, health,
                 and economic growth.
               </p>
+
+              <span className="text-secondary font-bold tracking-widest uppercase text-sm mb-2 block mt-8">
+                Our Mission
+              </span>
               <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
                 At MajiSafi, we are committed to ending water scarcity by
                 drilling sustainable boreholes into deeper aquifers, ensuring
