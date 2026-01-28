@@ -46,7 +46,7 @@ export default function Navigation() {
               <img
                 src="/logo.png"
                 alt="Maji Safi logo"
-                className="h-6 w-6 object-contain"
+                className="h-10 w-10 object-contain"
               />
             </div>
             <span className="font-heading font-bold text-xl md:text-2xl text-white tracking-tight">

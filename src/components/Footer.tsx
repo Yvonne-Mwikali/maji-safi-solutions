@@ -25,7 +25,7 @@ export default function Footer() {
                 <img
                   src="/logo.png"
                   alt="Maji Safi logo"
-                  className="h-7 w-7 object-contain"
+                  className="h-10 w-10 object-contain"
                 />
               </div>
               <span className="font-heading font-bold text-xl text-white">
